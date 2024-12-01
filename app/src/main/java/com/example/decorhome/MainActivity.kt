@@ -26,11 +26,14 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.decorhome.DpHelper.Routers
 import com.example.decorhome.DpHelper.TabbarItem
+import com.example.decorhome.StackScreen.Detail
 import com.example.decorhome.StackScreen.LoginScreen
 import com.example.decorhome.StackScreen.Register
 import com.example.decorhome.StackScreen.Wellcome
@@ -45,7 +48,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            App()
+            Tabbar()
         }
     }
 }
@@ -67,6 +70,8 @@ fun App(){
         composable(Routers.Tabbar){
             Tabbar()
         }
+
+
     }
 }
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -80,15 +85,20 @@ fun Tabbar() {
     val profileTab = TabbarItem("profile", R.drawable.profilefocus, R.drawable.profile)
 
     val tabBarItems = listOf(homeTab, favoriteTab, notificationTab, profileTab)
-
     Scaffold(
         bottomBar = { TabView(tabBarItems, navController) }
     ) {
         NavHost(navController = navController, startDestination = "home") {
-            composable("home") { Home() }
+            composable("home") { Home(navController) }
             composable("favorite") { Favorite() }
             composable("notification") { Notification() }
             composable("profile") { Profile() }
+            composable("Detail/{_id}",
+                arguments = listOf(navArgument("_id") {type = NavType.StringType})
+            ) { backStackEntry ->
+                Detail(_id = backStackEntry.arguments?.getString("_id"))
+            }
+
         }
     }
 }

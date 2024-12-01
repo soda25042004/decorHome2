@@ -83,8 +83,9 @@ dependencies {
     // Feature module support for Fragments
     implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
 
-    implementation ("com.squareup.retrofit2:retrofit:2.4.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.3.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
 
     // Testing Navigation

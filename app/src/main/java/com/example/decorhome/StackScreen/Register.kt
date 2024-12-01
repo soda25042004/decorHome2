@@ -45,10 +45,10 @@ fun Register(navController: NavController, viewModelApp: ViewModelApp = viewMode
     val context = LocalContext.current
     val register by viewModelApp.register
 
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
+    var name by remember { mutableStateOf("soda") }
+    var email by remember { mutableStateOf("12345678") }
+    var password by remember { mutableStateOf("1") }
+    var confirmPassword by remember { mutableStateOf("1") }
     var errorMessage by remember { mutableStateOf("") }
 
     var passwordVisible by remember { mutableStateOf(false) }
@@ -61,7 +61,7 @@ fun Register(navController: NavController, viewModelApp: ViewModelApp = viewMode
         viewModelApp.registerViewModel(request)
     }
 
-    LaunchedEffect(register) {
+    LaunchedEffect(key1 = register) {
         if (register != null) {
             if (register?.status == true) {
                 if (password == confirmPassword) {
